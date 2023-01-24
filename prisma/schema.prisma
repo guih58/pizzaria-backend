@@ -1,0 +1,89 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// model no banco
+//Criar uma migration: yarn prisma migrate dev
+
+model User {
+  id        String    @id @default(uuid())
+  name      String
+  email     String
+  password  String
+  create_at DateTime? @default(now())
+  update_at DateTime? @default(now())
+
+  //nome da tabela
+  @@map("users")
+}
+
+//model no banco de categoria
+model Category {
+  id        String    @id @default(uuid())
+  name      String
+  create_at DateTime? @default(now())
+  update_at DateTime? @default(now())
+
+  //Relacionamento de produtos com categorias muitos produtos e uma categoria
+  products Product[]
+
+  //nome da tabela
+  @@map("categories")
+}
+
+//model no banco de produtos
+model Product {
+  id          String    @id @default(uuid())
+  name        String
+  price       String
+  description String
+  banner      String
+  create_at   DateTime? @default(now())
+  update_at   DateTime? @default(now())
+
+  //Fazendo o relacionamento do categoria para muitos produtos.
+  category Category @relation(fields: [category_id], references: [id])
+
+  //Campo que vai receber o id da categoria
+  category_id String
+  //Campo que vai receber o id da categoria
+  item Item[]
+
+  //nome da tabela
+  @@map("product")
+}
+
+model Order {
+  id        String    @id @default(uuid())
+  table     Int
+  status    Boolean   @default(false) //ele sempre será falso
+  draft     Boolean   @default(true) //ele sempre será verdadeiro
+  name      String? // com esse sinal de ? ele se torna opcional
+  create_at DateTime? @default(now())
+  update_at DateTime? @default(now())
+
+  items Item[]
+
+  @@map("orders")
+}
+
+model Item {
+  id     String @id @default(uuid())
+  amount Int
+  create_at  DateTime? @default(now())
+  update_at  DateTime? @default(now())
+  product    Product   @relation(fields: [product_id], references: [id])
+  order      Order     @relation(fields: [order_id], references: [id])
+  order_id   String
+  product_id String
+
+  @@map("items")
+}
