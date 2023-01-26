@@ -1,4 +1,5 @@
 import {Router} from "express";
+import { CreateCategoryController } from "./Controllers/category/CreateCategoryController";
 import { AuthUserController } from "./Controllers/user/AuthUserController";
 import { CreateUserController } from "./Controllers/user/CreateUserController";
 import { DetailUserController } from "./Controllers/user/DetailUserController";
@@ -18,5 +19,9 @@ router.post('/session', new AuthUserController().handle)
 // o IsAuthenticated e um middlewares que e nada mais que uma logica para proceguir com a execulção do serviço
 router.get('/me', isAuthenticated  ,new DetailUserController().handle)
 
+
+// -- ROTAS CATEGORIAS
+//Criando categorias
+router.post('/category', isAuthenticated, new CreateCategoryController().handle)
 
 export { router};
