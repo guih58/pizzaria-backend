@@ -25,6 +25,9 @@ try{
 //Validar o token
 const {sub} =verify(token,process.env.JWT_SECRET) as PayLoad;
 
+// tem que criar um tipo personalizado na pasta @types e editar o arquivo TS o "typeRoots" apontando o arquivo do tipo  "./src/@types"
+req.user_id=sub;
+
 //Já que o token e valido pode prosseguir
 return next()
 
