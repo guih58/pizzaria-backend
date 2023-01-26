@@ -1,5 +1,6 @@
 import {Router} from "express";
 import { CreateCategoryController } from "./Controllers/category/CreateCategoryController";
+import { ListCategoryController } from "./Controllers/category/ListCategoryController";
 import { AuthUserController } from "./Controllers/user/AuthUserController";
 import { CreateUserController } from "./Controllers/user/CreateUserController";
 import { DetailUserController } from "./Controllers/user/DetailUserController";
@@ -21,7 +22,10 @@ router.get('/me', isAuthenticated  ,new DetailUserController().handle)
 
 
 // -- ROTAS CATEGORIAS
+
 //Criando categorias
 router.post('/category', isAuthenticated, new CreateCategoryController().handle)
+//listando categorias
+router.get('/category', isAuthenticated, new ListCategoryController().handle)
 
 export { router};
