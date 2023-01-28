@@ -2,6 +2,7 @@ import express, {Request, Response, NextFunction} from 'express';
 import 'express-async-errors'
 
 import cors from 'cors';
+import path from 'path'
 
 import {router} from './router'
 
@@ -15,7 +16,11 @@ app.use(cors())
 
 app.use(router);
 
-
+//Rota estatica para listar a imagem e um middlewares
+app.use(
+    '/files',
+    express.static(path.resolve(__dirname,'..','tmp'))
+)
 
 
 //Tratando exeções com a Lib express-async-errros

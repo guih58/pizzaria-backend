@@ -1,13 +1,20 @@
 import {Router} from "express";
+import multer from 'multer'
 import { CreateCategoryController } from "./Controllers/category/CreateCategoryController";
 import { ListCategoryController } from "./Controllers/category/ListCategoryController";
+import { CreateProductController } from "./Controllers/product/CreateProductController";
 import { AuthUserController } from "./Controllers/user/AuthUserController";
 import { CreateUserController } from "./Controllers/user/CreateUserController";
 import { DetailUserController } from "./Controllers/user/DetailUserController";
 import { isAuthenticated } from "./middlewares/isAuthenticated";
 
 
+import uploadConfig from './config/multer'
+
 const router = Router();
+
+//Aqui e o multer que está configurado na pasta molter, recebendo a pasta onde a imagem vai ser salva.
+const upload = multer(uploadConfig.upload("./tmp"))
 
 
 //--ROTAS USER --
@@ -27,5 +34,20 @@ router.get('/me', isAuthenticated  ,new DetailUserController().handle)
 router.post('/category', isAuthenticated, new CreateCategoryController().handle)
 //listando categorias
 router.get('/category', isAuthenticated, new ListCategoryController().handle)
+
+
+// --ROTAS PRODUCT
+
+//Cadastro de produto
+//O Middlewares upload e para salvar a imagem, deve passar o file
+router.post('/product', isAuthenticated, upload.single('file'), new CreateProductController().handle)
+
+
+
+
+
+
+
+
 
 export { router};
