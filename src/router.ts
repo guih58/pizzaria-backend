@@ -10,6 +10,7 @@ import { isAuthenticated } from "./middlewares/isAuthenticated";
 
 
 import uploadConfig from './config/multer'
+import { ListByCategoryController } from "./Controllers/product/ListByCategoryController";
 
 const router = Router();
 
@@ -41,6 +42,8 @@ router.get('/category', isAuthenticated, new ListCategoryController().handle)
 //Cadastro de produto
 //O Middlewares upload e para salvar a imagem, deve passar o file
 router.post('/product', isAuthenticated, upload.single('file'), new CreateProductController().handle)
+//Rota para lista os produtos de acordo com a categoria
+router.get('/category/product', isAuthenticated, new ListByCategoryController().handle)
 
 
 
