@@ -16,6 +16,7 @@ import { RemoveItemController } from "./Controllers/order/RemoveItemController";
 import { SendOrderController } from "./Controllers/order/SendOrderController";
 import { ListOrderController } from "./Controllers/order/ListOrderController";
 import { DetailOrderController } from "./Controllers/order/DetailOrderController";
+import { FinishOrderController } from "./Controllers/order/FinishOrderController";
 
 const router = Router();
 
@@ -67,6 +68,8 @@ router.put('/order/send', isAuthenticated, new SendOrderController().handle)
 router.get('/orders', isAuthenticated, new ListOrderController().handle)
 //Rota do detalhes das ordens
 router.get('/order/detail', isAuthenticated, new DetailOrderController().handle)
+//Finalizando a order
+router.put('/order/finish', isAuthenticated, new FinishOrderController().handle)
 
 
 
