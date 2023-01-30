@@ -14,6 +14,7 @@ import { RemoveOrderController } from "./Controllers/order/RemoveOrderController
 import { AddItemController } from "./Controllers/order/AddItemController";
 import { RemoveItemController } from "./Controllers/order/RemoveItemController";
 import { SendOrderController } from "./Controllers/order/SendOrderController";
+import { ListOrderController } from "./Controllers/order/ListOrderController";
 
 const router = Router();
 
@@ -55,14 +56,14 @@ router.get('/category/product', isAuthenticated, new ListByCategoryController().
 router.post('/order', isAuthenticated, new CreateOrderController().handle)
 //Rota para deletar order
 router.delete('/order', isAuthenticated, new RemoveOrderController().handle)
-
-
 //Criando rota de criar um item
 router.post('/order/add', isAuthenticated, new AddItemController().handle)
 // Removendo um item da ordem
 router.delete('/order/remove', isAuthenticated, new RemoveItemController().handle)
 //Rota para manda as ordens
 router.put('/order/send', isAuthenticated, new SendOrderController().handle)
+//Rota para listar os pedidos que nãoe stão finalizados
+router.get('/orders', isAuthenticated, new ListOrderController().handle)
 
 
 
