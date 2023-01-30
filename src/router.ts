@@ -7,10 +7,10 @@ import { AuthUserController } from "./Controllers/user/AuthUserController";
 import { CreateUserController } from "./Controllers/user/CreateUserController";
 import { DetailUserController } from "./Controllers/user/DetailUserController";
 import { isAuthenticated } from "./middlewares/isAuthenticated";
-
-
 import uploadConfig from './config/multer'
 import { ListByCategoryController } from "./Controllers/product/ListByCategoryController";
+import { CreateOrderController } from "./Controllers/order/CreateOrderController";
+import { RemoveOrderController } from "./Controllers/order/RemoveOrderController";
 
 const router = Router();
 
@@ -46,6 +46,12 @@ router.post('/product', isAuthenticated, upload.single('file'), new CreateProduc
 router.get('/category/product', isAuthenticated, new ListByCategoryController().handle)
 
 
+
+// --ROTAS ORDER
+//Rota para criar uma order
+router.post('/order', isAuthenticated, new CreateOrderController().handle)
+//Rota para deletar order
+router.delete('/order', isAuthenticated, new RemoveOrderController().handle)
 
 
 
