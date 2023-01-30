@@ -13,6 +13,7 @@ import { CreateOrderController } from "./Controllers/order/CreateOrderController
 import { RemoveOrderController } from "./Controllers/order/RemoveOrderController";
 import { AddItemController } from "./Controllers/order/AddItemController";
 import { RemoveItemController } from "./Controllers/order/RemoveItemController";
+import { SendOrderController } from "./Controllers/order/SendOrderController";
 
 const router = Router();
 
@@ -60,7 +61,8 @@ router.delete('/order', isAuthenticated, new RemoveOrderController().handle)
 router.post('/order/add', isAuthenticated, new AddItemController().handle)
 // Removendo um item da ordem
 router.delete('/order/remove', isAuthenticated, new RemoveItemController().handle)
-
+//Rota para manda as ordens
+router.put('/order/send', isAuthenticated, new SendOrderController().handle)
 
 
 
