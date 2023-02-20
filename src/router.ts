@@ -14,7 +14,7 @@ import { RemoveOrderController } from "./Controllers/order/RemoveOrderController
 import { AddItemController } from "./Controllers/order/AddItemController";
 import { RemoveItemController } from "./Controllers/order/RemoveItemController";
 import { SendOrderController } from "./Controllers/order/SendOrderController";
-import { ListOrderController } from "./Controllers/order/ListOrderController";
+import { ListOrdersController } from "./Controllers/order/ListOrderController";
 import { DetailOrderController } from "./Controllers/order/DetailOrderController";
 import { FinishOrderController } from "./Controllers/order/FinishOrderController";
 
@@ -64,8 +64,8 @@ router.post('/order/add', isAuthenticated, new AddItemController().handle)
 router.delete('/order/remove', isAuthenticated, new RemoveItemController().handle)
 //Rota para manda as ordens
 router.put('/order/send', isAuthenticated, new SendOrderController().handle)
-//Rota para listar os pedidos que nãoe stão finalizados
-router.get('/orders', isAuthenticated, new ListOrderController().handle)
+//Rota para listar os pedidos que não estão finalizados
+router.get('/orders', isAuthenticated, new ListOrdersController().handle)
 //Rota do detalhes das ordens
 router.get('/order/detail', isAuthenticated, new DetailOrderController().handle)
 //Finalizando a order
